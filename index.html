@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aventrix Lab | Flow Beyond Limits</title>
+
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;600;800&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#020617;
+  --card:rgba(255,255,255,.06);
+  --text:#ffffff;
+  --sub:#cbd5f5;
+  --blue:#00c6ff;
+  --blue2:#0072ff;
+}
+
+.light{
+  --bg:#f8fafc;
+  --card:rgba(0,0,0,.06);
+  --text:#020617;
+  --sub:#334155;
+}
+
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Orbitron',sans-serif}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  transition:.5s;
+  overflow-x:hidden;
+}
+
+/* ===== PARTICLES ===== */
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:-2;
+}
+
+/* ===== TOGGLE ===== */
+.toggle{
+  position:fixed;
+  top:20px;
+  right:20px;
+  z-index:99;
+  padding:10px 18px;
+  border-radius:30px;
+  cursor:pointer;
+  background:linear-gradient(135deg,var(--blue),var(--blue2));
+  color:#fff;
+  box-shadow:0 0 25px rgba(0,198,255,.8);
+}
+
+/* ===== HERO ===== */
+.hero{
+  min-height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  align-items:center;
+  text-align:center;
+  padding:60px 20px;
+  position:relative;
+  background:
+    linear-gradient(
+      to bottom,
+      rgba(2,6,23,0.85),
+      rgba(2,6,23,0.6)
+    ),
+    radial-gradient(circle at top,#1e40af,#020617);
+}
+
+
+.hero img{
+  width:650px;
+  max-width:80%;
+  margin-bottom:0px;
+  filter:drop-shadow(0 0 35px rgba(0,198,255,.7));
+}
+
+.hero p{
+  max-width:720px;
+  color:#e0f2fe;
+  line-height:1.9;
+  font-size:1.1rem;
+  text-shadow:0 0 12px rgba(0,0,0,0.6);
+}
+
+
+/* ===== CTA ===== */
+.cta{
+  display:flex;
+  flex-wrap:wrap;
+  gap:18px;
+  margin-top:35px;
+}
+.cta a{
+  padding:16px 36px;
+  border-radius:50px;
+  text-decoration:none;
+  color:#fff;
+  background:linear-gradient(135deg,var(--blue),var(--blue2));
+  box-shadow:0 0 35px rgba(0,198,255,.9);
+  transition:.4s;
+}
+.cta a:hover{
+  transform:scale(1.1);
+  box-shadow:0 0 60px rgba(0,198,255,1);
+}
+.cta a.tt{
+  background:linear-gradient(135deg,#25F4EE,#FE2C55);
+  box-shadow:0 0 35px rgba(254,44,85,.7);
+}
+
+.cta a.tt:hover{
+  box-shadow:
+    0 0 45px rgba(37,244,238,.9),
+    0 0 65px rgba(254,44,85,.8);
+}
+.cta a.ig{
+  background:linear-gradient(
+    135deg,
+    #f58529,
+    #dd2a7b,
+    #8134af,
+    #515bd4
+  );
+  box-shadow:0 0 35px rgba(221,42,123,.7);
+}
+
+.cta a.ig:hover{
+  box-shadow:
+    0 0 45px rgba(245,133,41,.8),
+    0 0 65px rgba(221,42,123,.9);
+}
+.cta a.wa{
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  box-shadow:
+    0 0 25px rgba(34,197,94,.7),
+    inset 0 0 0 rgba(255,255,255,0);
+  transition:
+    transform .4s ease,
+    box-shadow .4s ease,
+    filter .4s ease;
+}
+
+.cta a.wa:hover{
+  transform:scale(1.12);
+  filter:brightness(1.15);
+  box-shadow:
+    0 0 45px rgba(34,197,94,.9),
+    0 0 70px rgba(34,197,94,.6);
+}
+
+
+/* ===== SECTION ===== */
+section{
+  padding:100px 20px;
+  text-align:center;
+}
+h2{
+  font-size:2.4rem;
+  margin-bottom:60px;
+  background:linear-gradient(90deg,var(--blue),#00f2fe);
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+/* ===== FEATURES ===== */
+.features{
+  max-width:1100px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:repeat(auto-fit,minmax(240px,1fr));
+  gap:30px;
+}
+.card{
+  background:var(--card);
+  backdrop-filter:blur(16px);
+  border-radius:22px;
+  padding:36px 28px;
+  transition:.4s;
+  box-shadow:0 0 25px rgba(0,0,0,.4);
+}
+.card:hover{
+  transform:translateY(-14px);
+  box-shadow:0 0 50px rgba(0,198,255,.9);
+}
+.card h3{color:var(--blue);margin-bottom:12px}
+
+/* ===== PRODUCT ===== */
+.product{
+  max-width:1000px;
+  margin:auto;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
+  align-items:center;
+}
+.product img{
+  width:100%;
+  border-radius:28px;
+  box-shadow:0 0 60px rgba(0,198,255,.8);
+}
+.product p{
+  color:var(--sub);
+  line-height:1.8;
+}
+
+/* ===== BUY ===== */
+.buy{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+  margin-top:30px;
+}
+.buy a{
+  padding:14px 30px;
+  border-radius:40px;
+  text-decoration:none;
+  color:#fff;
+  background:linear-gradient(135deg,#00f2fe,#0072ff);
+  box-shadow:0 0 30px rgba(0,198,255,.8);
+}
+.buy a.shopee{
+  background:linear-gradient(135deg,#f97316,#ea580c);
+  color:#fff;
+  box-shadow:
+    0 0 25px rgba(249,115,22,.8),
+    0 0 50px rgba(249,115,22,.4);
+  transition:
+    transform .4s ease,
+    box-shadow .4s ease,
+    filter .4s ease;
+}
+
+.buy a.shopee:hover{
+  transform:translateY(-6px) scale(1.08);
+  filter:brightness(1.15);
+  box-shadow:
+    0 0 45px rgba(249,115,22,1),
+    0 0 80px rgba(249,115,22,.7);
+}
+.buy a.tokopedia{
+  background:linear-gradient(135deg,#22c55e,#16a34a);
+  color:#fff;
+  box-shadow:
+    0 0 25px rgba(34,197,94,.8),
+    0 0 50px rgba(34,197,94,.4);
+  transition:
+    transform .4s ease,
+    box-shadow .4s ease,
+    filter .4s ease;
+}
+
+.buy a.tokopedia:hover{
+  transform:translateY(-6px) scale(1.08);
+  filter:brightness(1.15);
+  box-shadow:
+    0 0 45px rgba(34,197,94,1),
+    0 0 80px rgba(34,197,94,.7);
+}
+.buy a.lazada{
+  background:linear-gradient(135deg,#4f46e5,#2563eb);
+  color:#fff;
+  box-shadow:
+    0 0 25px rgba(79,70,229,.8),
+    0 0 50px rgba(37,99,235,.5);
+  transition:
+    transform .4s ease,
+    box-shadow .4s ease,
+    filter .4s ease;
+}
+
+.buy a.lazada:hover{
+  transform:translateY(-6px) scale(1.08);
+  filter:brightness(1.15);
+  box-shadow:
+    0 0 45px rgba(79,70,229,1),
+    0 0 80px rgba(37,99,235,.8);
+}
+
+
+/* ===== FOOTER ===== */
+footer{
+  padding:60px 20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  background:var(--bg);
+}
+
+footer p{color:var(--sub)}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  .hero img{width:180px}
+  .product{grid-template-columns:1fr}
+}
+</style>
+</head>
+
+<body>
+
+<div class="toggle" onclick="toggleMode()">Dark / Light</div>
+<canvas id="particles"></canvas>
+
+<section class="hero">
+  <img id="logo" src="logo-dark.png">
+  <p>
+    Turbo Gaming Cooling Pad premium dengan airflow ekstrem,
+    desain futuristik, dan performa tanpa kompromi.
+  </p>
+
+  <div class="cta">
+    <a href="https://wa.me/628567886450" class="wa">WhatsApp</a>
+    <a href="https://www.instagram.com/aventrix.lab" class="ig">Instagram</a>
+    <a href="https://www.tiktok.com/@aventrix.lab" class="tt">TikTok</a>
+    <a href="#buy">Beli Sekarang</a>
+  </div>
+</section>
+
+<section>
+  <h2>WHY AVENTRIX?</h2>
+  <div class="features">
+    <div class="card"><h3>Turbo Airflow</h3><p>Pendinginan agresif untuk gaming marathon.</p></div>
+    <div class="card"><h3>Gaming Grade</h3><p>Kokoh & presisi untuk laptop performa tinggi.</p></div>
+    <div class="card"><h3>Luxury Design</h3><p>Visual premium untuk setup elit.</p></div>
+  </div>
+</section>
+
+<section id="buy">
+  <h2>READY TO BUY</h2>
+  <div class="product">
+    <img src="produk2.png">
+    <div>
+      <p>
+        Aventrix Cooling Pad Turbo Series dirancang untuk gamer,
+        kreator, dan power user yang menuntut performa maksimal.
+      </p>
+      <div class="buy">
+      <a href="#" class="shopee">Shopee</a>
+      <a href="#" class="tokopedia">Tokopedia</a>
+      <a href="#" class="lazada">Lazada</a>
+    </div>
+
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>© 2025 Aventrix.lab — Flow Beyond Limits</p>
+</footer>
+
+<script>
+/* ===== PARTICLES ===== */
+const c=document.getElementById('particles'),ctx=c.getContext('2d');
+let w,h,p=[];
+function resize(){w=c.width=innerWidth;h=c.height=innerHeight}
+window.onresize=resize;resize();
+for(let i=0;i<90;i++)
+p.push({x:Math.random()*w,y:Math.random()*h,r:Math.random()*2+1,
+dx:(Math.random()-.5)*.4,dy:(Math.random()-.5)*.4});
+(function draw(){
+ctx.clearRect(0,0,w,h);
+ctx.fillStyle='rgba(0,198,255,.6)';
+p.forEach(o=>{
+ctx.beginPath();ctx.arc(o.x,o.y,o.r,0,7);ctx.fill();
+o.x+=o.dx;o.y+=o.dy;
+if(o.x<0||o.x>w)o.dx*=-1;
+if(o.y<0||o.y>h)o.dy*=-1;
+});
+requestAnimationFrame(draw);
+})();
+
+/* ===== DARK / LIGHT ===== */
+function toggleMode(){
+  document.body.classList.toggle('light');
+  localStorage.setItem(
+    'mode',
+    document.body.classList.contains('light') ? 'light' : 'dark'
+  );
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  if(localStorage.getItem('mode')==='light'){
+    document.body.classList.add('light');
+  }
+});
+</script>
+
+
+</body>
+</html>
